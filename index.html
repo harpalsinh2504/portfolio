@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional portfolio of John Doe, a full-stack web developer showcasing skills, projects, and experience in building modern web applications.">
+    <meta name="keywords" content="John Doe, web developer, portfolio, full-stack, JavaScript, React, Node.js">
+    <meta name="author" content="John Doe">
+    <title>John Doe - Full-Stack Web Developer</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Arial', sans-serif;
+        }
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #f8f9fa;
+        }
+        .dark-mode .navbar, .dark-mode .card, .dark-mode .timeline-item {
+            background-color: #2c2c2c !important;
+            color: #f8f9fa;
+        }
+        .dark-mode .hero-section::before {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .navbar {
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            position: relative;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+        }
+        .hero-section h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin: 20px 0;
+            opacity: 0.9;
+        }
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        .hero-section .btn {
+            padding: 12px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .hero-section .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        .hero-bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .hero-bg-animation .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 20%;
+            animation-delay: 5s;
+        }
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+        }
+        .tech-tag {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            animation: techFloat 12s infinite ease-in-out;
+            pointer-events: none;
+        }
+        .tag-html {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        .tag-php {
+            top: 40%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+        .tag-python {
+            bottom: 25%;
+            left: 30%;
+            animation-delay: 6s;
+        }
+        @keyframes techFloat {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.7; }
+            50% { transform: translateY(-30px) translateX(20px); opacity: 0.4; }
+        }
+        .skills-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+        .radial-progress {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: auto;
+        }
+        .radial-progress svg {
+            transform: rotate(-90deg);
+        }
+        .radial-progress circle {
+            fill: none;
+            stroke-width: 10;
+        }
+        .radial-progress .circle-bg {
+            stroke: #e0e0e0;
+        }
+        .radial-progress .circle-fg {
+            stroke: #007bff;
+            stroke-dasharray: 314;
+            stroke-dashoffset: 314;
+            transition: stroke-dashoffset 1.5s ease-in-out;
+        }
+        .radial-progress .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #007bff;
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 10px;
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: auto;
+        }
+        .filter-buttons .btn {
+            margin: 5px;
+        }
+        .filter-buttons .btn.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .portfolio-item .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .portfolio-item .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 50px;
+            height: 3px;
+            background: #007bff;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">John Doe</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item">
+                        <button id="theme-toggle" class="btn btn-outline-secondary ms-2">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-bg-animation">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="tech-tag tag-html">HTML</div>
+            <div class="tech-tag tag-php">PHP</div>
+            <div class="tech-tag tag-python">Python</div>
+        </div>
+        <div class="container hero-content">
+            <h1 data-aos="fade-up">John Doe</h1>
+            <h3 data-aos="fade-up" data-aos-delay="100">Full-Stack Web Developer</h3>
+            <p data-aos="fade-up" data-aos-delay="200">Transforming ideas into powerful, scalable, and user-focused web solutions.</p>
+            <a href="resume.pdf" class="btn btn-light mt-3" data-aos="fade-up" data-aos-delay="300" download>Download CV</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title" data-aos="fade-up">About Me</h2>
+            <div class="row">
+                <div class="col-md-6" data-aos="fade-right">
+                    <p>I'm John Doe, a dedicated full-stack web developer with over 7 years of experience in crafting high-performance web applications. My expertise spans both frontend and backend technologies, enabling me to deliver seamless and engaging user experiences.</p>
+                    <p>My unique value proposition lies in my ability to bridge the gap between technical excellence and creative design, ensuring projects are both functional and visually appealing. I thrive in collaborative environments and am committed to continuous learning to stay ahead in the ever-evolving tech landscape.</p>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <h4>Quick Facts</h4>
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <h5>7+</h5>
+                            <p>Years Experience</p>
+                        </div>
+                        <div class="col-4">
+                            <h5>50+</h5>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="col-4">
+                            <h5>15</h5>
+                            <p>Certifications</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5 skills-section">
+        <div class="container">
+            <h2 class="text-center section-title" data-aos="fade-up">Skills</h2>
+            <div class="filter-buttons text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+                <button class="btn btn-outline-primary active" data-filter="all">All</button>
+                <button class="btn btn-outline-primary" data-filter="frontend">Frontend</button>
+                <button class="btn btn-outline-primary" data-filter="backend">Backend</button>
+                <button class="btn btn-outline-primary" data-filter="soft">Soft Skills</button>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-3 col-sm-6 skill frontend" data-aos="fade-up">
+                    <div class="radial-progress" data-percentage="95">
+                        <svg width="120" height="120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-fg" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="percentage">95%</div>
+                    </div>
+                    <h5 class="mt-3">HTML5/CSS3</h5>
+                </div>
+                <div class="col-md-3 col-sm-6 skill frontend" data-aos="fade-up" data-aos-delay="100">
+                    <div class="radial-progress" data-percentage="90">
+                        <svg width="120" height="120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-fg" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="percentage">90%</div>
+                    </div>
+                    <h5 class="mt-3">JavaScript (ES6+)</h5>
+                </div>
+                <div class="col-md-3 col-sm-6 skill frontend" data-aos="fade-up" data-aos-delay="200">
+                    <div class="radial-progress" data-percentage="85">
+                        <svg width="120" height="120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-fg" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="percentage">85%</div>
+                    </div>
+                    <h5 class="mt-3">React.js</h5>
+                </div>
+                <div class="col-md-3 col-sm-6 skill backend" data-aos="fade-up" data-aos-delay="300">
+                    <div class="radial-progress" data-percentage="80">
+                        <svg width="120" height="120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-fg" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="percentage">80%</div>
+                    </div>
+                    <h5 class="mt-3">Node.js/Express</h5>
+                </div>
+                <div class="col-md-3 col-sm-6 skill backend" data-aos="fade-up" data-aos-delay="400">
+                    <div class="radial-progress" data-percentage="75">
+                        <svg width="120" height="120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-fg" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="percentage">75%</div>
+                    </div>
+                    <h5 class="mt-3">Python/Django</h5>
+                </div>
+                <div class="col-md-3 col-sm-6 skill backend" data-aos="fade-up" data-aos-delay="500">
+                    <div class="radial-progress" data-percentage="80">
+                        <svg width="120" height="120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-fg" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="percentage">80%</div>
+                    </div>
+                    <h5 class="mt-3">MongoDB/SQL</h5>
+                </div>
+                <div class="col-md-3 col-sm-6 skill soft" data-aos="fade-up" data-aos-delay="600">
+                    <div class="radial-progress" data-percentage="90">
+                        <svg width="120" height="120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-fg" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="percentage">90%</div>
+                    </div>
+                    <h5 class="mt-3">Team Leadership</h5>
+                </div>
+                <div class="col-md-3 col-sm-6 skill soft" data-aos="fade-up" data-aos-delay="700">
+                    <div class="radial-progress" data-percentage="95">
+                        <svg width="120" height="120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-fg" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="percentage">95%</div>
+                    </div>
+                    <h5 class="mt-3">Problem Solving</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title" data-aos="fade-up">Portfolio</h2>
+            <div class="filter-buttons text-center mb-4" data-aos="fade-up" data-aos-delay="100">
+                <button class="btn btn-outline-primary active" data-filter="all">All</button>
+                <button class="btn btn-outline-primary" data-filter="web">Web</button>
+                <button class="btn btn-outline-primary" data-filter="app">App</button>
+            </div>
+            <div class="row">
+                <div class="col-md-4 portfolio-item web" data-aos="fade-up">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200?text=E-Commerce+Platform" class="card-img-top" alt="E-Commerce Platform">
+                        <div class="card-body">
+                            <h5 class="card-title">E-Commerce Platform</h5>
+                            <p class="card-text">A scalable e-commerce website built with React, Node.js, and Stripe for payments.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#projectModal1">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 portfolio-item web" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200?text=Task+Manager" class="card-img-top" alt="Task Manager">
+                        <div class="card-body">
+                            <h5 class="card-title">Task Manager</h5>
+                            <p class="card-text">A productivity app with real-time collaboration using Vue.js and Firebase.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#projectModal2">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 portfolio-item app" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200?text=Fitness+App" class="card-img-top" alt="Fitness App">
+                        <div class="card-body">
+                            <h5 class="card-title">Fitness App</h5>
+                            <p class="card-text">A mobile-first fitness tracking app built with React Native and MongoDB.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#projectModal3">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modals -->
+            <div class="modal fade" id="projectModal1" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">E-Commerce Platform</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="https://via.placeholder.com/400?text=E-Commerce+Screenshot" class="img-fluid mb-3" alt="E-Commerce Platform">
+                            <p>Developed a fully responsive e-commerce platform with secure payment integration using Stripe, user authentication, and a dynamic product catalog. Built with React, Node.js, and MongoDB.</p>
+                            <p><strong>Technologies:</strong> React, Node.js, MongoDB, Stripe, Bootstrap</p>
+                            <a href="https://example.com" class="btn btn-primary">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="projectModal2" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Task Manager</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="https://via.placeholder.com/400?text=Task+Manager+Screenshot" class="img-fluid mb-3" alt="Task Manager">
+                            <p>A collaborative task management app with real-time updates, user roles, and drag-and-drop functionality. Built with Vue.js, Firebase, and Tailwind CSS.</p>
+                            <p><strong>Technologies:</strong> Vue.js, Firebase, Tailwind CSS</p>
+                            <a href="https://example.com" class="btn btn-primary">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="projectModal3" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Fitness App</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="https://via.placeholder.com/400?text=Fitness+App+Screenshot" class="img-fluid mb-3" alt="Fitness App">
+                            <p>A cross-platform fitness app for tracking workouts and nutrition. Features include offline support and data syncing. Built with React Native and MongoDB.</p>
+                            <p><strong>Technologies:</strong> React Native, MongoDB, Redux</p>
+                            <a href="https://example.com" class="btn btn-primary">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title" data-aos="fade-up">Work Experience</h2>
+            <div class="timeline position-relative">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h4>Senior Full-Stack Developer</h4>
+                            <p>TechSolutions Inc. | Jan 2022 - Present</p>
+                            <ul>
+                                <li>Led a team of 5 developers to build a SaaS platform, improving client retention by 25%.</li>
+                                <li>Optimized backend APIs, reducing response time by 40%.</li>
+                                <li>Implemented CI/CD pipelines for faster deployments.</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <img src="https://via.placeholder.com/50?text=TS" alt="TechSolutions Logo" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h4>Full-Stack Developer</h4>
+                            <p>InnovateTech | Jun 2019 - Dec 2021</p>
+                            <ul>
+                                <li>Developed a customer-facing dashboard with React and Node.js.</li>
+                                <li>Integrated third-party APIs for payment and analytics.</li>
+                                <li>Mentored junior developers, improving team productivity.</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <img src="https://via.placeholder.com/50?text=IT" alt="InnovateTech Logo" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h4>Junior Web Developer</h4>
+                            <p>StartUp Labs | Aug 2017 - May 2019</p>
+                            <ul>
+                                <li>Built responsive websites using HTML, CSS, and JavaScript.</li>
+                                <li>Collaborated with designers to create user-friendly interfaces.</li>
+                                <li>Contributed to open-source projects on GitHub.</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <img src="https://via.placeholder.com/50?text=SL" alt="StartUp Labs Logo" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title" data-aos="fade-up">Education & Certifications</h2>
+            <div class="row">
+                <div class="col-md-6" data-aos="fade-right">
+                    <h4>B.Sc. Computer Science</h4>
+                    <p>University of Technology | 2013 - 2017</p>
+                    <p>Graduated with honors, specializing in software engineering and database systems.</p>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <h4>Certifications</h4>
+                    <ul>
+                        <li>AWS Certified Solutions Architect (2023)</li>
+                        <li>Google Professional Cloud Developer (2022)</li>
+                        <li>Microsoft Certified: Azure Developer Associate (2021)</li>
+                        <li>FreeCodeCamp Full-Stack Development (2020)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title" data-aos="fade-up">Testimonials</h2>
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up" data-aos-delay="100">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <blockquote class="blockquote text-center">
+                            <p>"John's expertise in full-stack development transformed our project delivery. His attention to detail is unmatched."</p>
+                            <footer class="blockquote-footer">Sarah Johnson, CEO at TechSolutions Inc.</footer>
+                        </blockquote>
+                    </div>
+                    <div class="carousel-item">
+                        <blockquote class="blockquote text-center">
+                            <p>"Working with John was a game-changer. His ability to solve complex problems quickly is impressive."</p>
+                            <footer class="blockquote-footer">Michael Lee, Product Manager at InnovateTech</footer>
+                        </blockquote>
+                    </div>
+                    <div class="carousel-item">
+                        <blockquote class="blockquote text-center">
+                            <p>"John's leadership and technical skills made our project a success. Highly recommend!"</p>
+                            <footer class="blockquote-footer">Emily Davis, CTO at StartUp Labs</footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title" data-aos="fade-up">Contact Me</h2>
+            <form id="contactForm" class="contact-form" data-aos="fade-up" data-aos-delay="100">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+            </form>
+            <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="https://linkedin.com/in/johndoe" class="mx-3" aria-label="LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a>
+                <a href="https://github.com/johndoe" class="mx-3" aria-label="GitHub"><i class="fab fa-github fa-2x"></i></a>
+                <a href="https://twitter.com/johndoe" class="mx-3" aria-label="Twitter"><i class="fab fa-twitter fa-2x"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <p>&copy; 2025 John Doe. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Smooth scrolling
+        $('a.nav-link').on('click', function(event) {
+            if (this.hash !== '') {
+                event.preventDefault();
+                const hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top - 70
+                }, 800);
+            }
+        });
+
+        // Highlight active nav link on scroll
+        $(window).on('scroll', function() {
+            let scrollPosition = $(document).scrollTop() + 100;
+            $('section').each(function() {
+                let sectionTop = $(this).offset().top;
+                let sectionHeight = $(this).outerHeight();
+                let id = $(this).attr('id');
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    $('.nav-link').removeClass('active');
+                    $(`.nav-link[href="#${id}"]`).addClass('active');
+                }
+            });
+        });
+
+        // Dark mode toggle
+        $('#theme-toggle').on('click', function() {
+            $('body').toggleClass('dark-mode');
+            const icon = $(this).find('i');
+            icon.toggleClass('fa-moon fa-sun');
+            localStorage.setItem('theme', $('body').hasClass('dark-mode') ? 'dark' : 'light');
+        });
+
+        // Load theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            $('body').addClass('dark-mode');
+            $('#theme-toggle i').removeClass('fa-moon').addClass('fa-sun');
+        }
+
+        // Skills filter
+        $('.filter-buttons button').on('click', function() {
+            $('.filter-buttons button').removeClass('active');
+            $(this).addClass('active');
+            const filter = $(this).data('filter');
+            $('.skill').each(function() {
+                if (filter === 'all' || $(this).hasClass(filter)) {
+                    $(this).fadeIn(300);
+                } else {
+                    $(this).fadeOut(300);
+                }
+            });
+        });
+
+        // Portfolio filter
+        $('.filter-buttons button').on('click', function() {
+            $('.filter-buttons button').removeClass('active');
+            $(this).addClass('active');
+            const filter = $(this).data('filter');
+            $('.portfolio-item').each(function() {
+                if (filter === 'all' || $(this).hasClass(filter)) {
+                    $(this).fadeIn(300);
+                } else {
+                    $(this).fadeOut(300);
+                }
+            });
+        });
+
+        // Animate radial progress bars on scroll
+        $(window).on('scroll', function() {
+            $('.radial-progress').each(function() {
+                const bottom_of_object = $(this).offset().top + $(this).outerHeight();
+                const bottom_of_window = $(window).scrollTop() + $(window).height();
+                if (bottom_of_window > bottom_of_object && !$(this).hasClass('animated')) {
+                    $(this).addClass('animated');
+                    const percentage = $(this).data('percentage');
+                    const offset = 314 - (314 * percentage / 100);
+                    $(this).find('.circle-fg').css('stroke-dashoffset', offset);
+                }
+            });
+        });
+
+        // EmailJS (Replace with your EmailJS credentials)
+        emailjs.init("YOUR_USER_ID");
+        $('#contactForm').on('submit', function(event) {
+            event.preventDefault();
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(function() {
+                    alert('Message sent successfully!');
+                    $('#contactForm')[0].reset();
+                }, function(error) {
+                    alert('Failed to send message: ' + JSON.stringify(error));
+                });
+        });
+    </script>
+</body>
+</html>
